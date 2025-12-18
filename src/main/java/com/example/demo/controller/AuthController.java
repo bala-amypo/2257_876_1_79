@@ -19,32 +19,22 @@ public class AuthController {
         this.jwtUtil = jwtUtil;
         this.passwordEncoder = passwordEncoder;
     }
-
     @PostMapping("/register")
     public ResponseEntity<User> register(@RequestBody User user) {
         return new ResponseEntity<>(userService.register(user), HttpStatus.CREATED);
     }
-
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@RequestBody AuthRequest request) {
-
         User user = userService.findByEmail(request.getEmail());
-
         if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
-
         String token = jwtUtil.generateToken(
                 user.getId(),
                 user.getEmail(),
                 user.getRole()
         );
-
-        AuthResponse response = new AuthResponse(
-                token,
-                user.getId(),
-                user.getEmail(),
-                user.getRole()
+        AuthResponse response = new AuthResponse( token,user.getId(),user.getEmail(),user.getRole()
         );
         return ResponseEntity.ok(response);
     }
