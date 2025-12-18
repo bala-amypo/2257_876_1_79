@@ -12,9 +12,7 @@ public class AuthController {
     private final UserService userService;
     private final JwtUtil jwtUtil;
     private final PasswordEncoder passwordEncoder;
-    public AuthController(UserService userService,
-                          JwtUtil jwtUtil,
-                          PasswordEncoder passwordEncoder) {
+    public AuthController(UserService userService,JwtUtil jwtUtil,PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.jwtUtil = jwtUtil;
         this.passwordEncoder = passwordEncoder;
@@ -34,8 +32,7 @@ public class AuthController {
                 user.getEmail(),
                 user.getRole()
         );
-        AuthResponse response = new AuthResponse( token,user.getId(),user.getEmail(),user.getRole()
-        );
+        AuthResponse response = new AuthResponse( token,user.getId(),user.getEmail(),user.getRole());
         return ResponseEntity.ok(response);
     }
 }
