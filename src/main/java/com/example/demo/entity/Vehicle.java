@@ -1,12 +1,8 @@
 package com.example.demo.entity;
-
 import jakarta.persistence.*;
-
 @Entity
 public class Vehicle {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
     private User user;
@@ -17,11 +13,9 @@ public class Vehicle {
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
         this.id = id;
     }
-
     public User getUser() {
         return user;
     }
