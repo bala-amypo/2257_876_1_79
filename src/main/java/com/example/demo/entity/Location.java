@@ -38,20 +38,11 @@ public class Location {
         this.latitude = latitude;
         this.longitude = longitude;
     }
-    public Shipment() {
+    public Location() {
     }
-    public Shipment(Vehicle vehicle, Location pickupLocation, Location dropLocation,Double weightKg, LocalDate scheduledDate){
-        this.vehicle = vehicle;
-        this.pickupLocation = pickupLocation;
-        this.dropLocation = dropLocation;
-        this.weightKg = weightKg;
-        this.scheduledDate = scheduledDate;
-    }
-     public RouteOptimizationResult() {
-    }
-    public RouteOptimizationResult(Shipment shipment, Double optimizedDistanceKm,Double estimatedFuelUsageL) {
-        this.shipment = shipment;
-        this.optimizedDistanceKm = optimizedDistanceKm;
-        this.estimatedFuelUsageL = estimatedFuelUsageL;
+    public Location(String name, Double latitude, Double longitude) {
+        this.name = name;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 }
