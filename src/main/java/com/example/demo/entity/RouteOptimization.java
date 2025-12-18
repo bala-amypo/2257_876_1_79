@@ -41,4 +41,11 @@ public class RouteOptimizationResult {
     public LocalDateTime getGeneratedAt() {
         return generatedAt;
     }
+      public RouteOptimizationResult() {
+    }
+    public RouteOptimizationResult(Shipment shipment,Double optimizedDistanceKm, Double estimatedFuelUsageL) {
+        this.shipment = shipment;
+        this.optimizedDistanceKm = optimizedDistanceKm;
+        this.estimatedFuelUsageL = estimatedFuelUsageL;
+    }
 }
