@@ -3,6 +3,8 @@ import jakarta.persistence.*;
 @Entity
 public class User {
 @Id
+@Table( name = "users",uniqueConstraints = @UniqueConstraint(columnNames = "email")
+)
 private Long id;
 private String name;
 @Column( unique = true)
