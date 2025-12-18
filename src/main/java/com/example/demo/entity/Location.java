@@ -31,4 +31,22 @@ public class Location {
     public void setLongitude(Double longitude) {
         this.longitude = longitude;
     }
+       public Location() {
+    }
+    public Location(String name, Double latitude, Double longitude) {
+        this.name = name;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+    public Shipment() {
+    }
+    public Shipment(Vehicle vehicle, Location pickupLocation, Location dropLocation,
+                    Double weightKg,
+                    LocalDate scheduledDate) {
+        this.vehicle = vehicle;
+        this.pickupLocation = pickupLocation;
+        this.dropLocation = dropLocation;
+        this.weightKg = weightKg;
+        this.scheduledDate = scheduledDate;
+    }
 }
