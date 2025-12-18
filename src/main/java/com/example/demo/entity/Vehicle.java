@@ -25,19 +25,27 @@ public class Vehicle {
     public String getVehicleNumber() {
         return vehicleNumber;
     }
-    public void setVehicleNumber(String vehicleNumber) {
+    public void setVehicleNumber(String vehicleNumber){
         this.vehicleNumber = vehicleNumber;
     }
-    public Double getCapacityKg() {
+    public Double getCapacityKg(){
         return capacityKg;
     }
-    public void setCapacityKg(Double capacityKg) {
+    public void setCapacityKg(Double capacityKg){
         this.capacityKg = capacityKg;
     }
-    public Double getFuelEfficiency() {
+    public Double getFuelEfficiency(){
         return fuelEfficiency;
     }
-    public void setFuelEfficiency(Double fuelEfficiency) {
+    public void setFuelEfficiency(Double fuelEfficiency){
+        this.fuelEfficiency = fuelEfficiency;
+    }
+    public Vehicle() {
+    }
+    public Vehicle(User user, String vehicleNumber, Double capacityKg, Double fuelEfficiency){
+        this.user = user;
+        this.vehicleNumber = vehicleNumber;
+        this.capacityKg = capacityKg;
         this.fuelEfficiency = fuelEfficiency;
     }
 }
