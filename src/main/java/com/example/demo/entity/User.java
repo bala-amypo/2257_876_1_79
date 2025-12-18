@@ -9,4 +9,16 @@ private String name;
 private String email;
 private String password;
 private String role;
+public Long getId(){
+    return Id;
+}
+public Long setId(){
+    this.id=id;
+}
+public String getName(){
+    return name;
+}
+public String setName(){
+    
+}
 }
