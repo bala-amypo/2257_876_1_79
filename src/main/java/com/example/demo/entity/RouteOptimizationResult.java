@@ -10,6 +10,13 @@ public class RouteOptimizationResult {
     private Double optimizedDistanceKm;
     private Double estimatedFuelUsageL;
     private LocalDateTime generatedAt;
+      public RouteOptimizationResult() {
+    }
+    public RouteOptimizationResult(Shipment shipment,Double optimizedDistanceKm, Double estimatedFuelUsageL) {
+        this.shipment = shipment;
+        this.optimizedDistanceKm = optimizedDistanceKm;
+        this.estimatedFuelUsageL = estimatedFuelUsageL;
+    }
     @PrePersist
     public void setGeneratedAt() {
         this.generatedAt = LocalDateTime.now();
@@ -41,11 +48,5 @@ public class RouteOptimizationResult {
     public LocalDateTime getGeneratedAt() {
         return generatedAt;
     }
-      public RouteOptimizationResult() {
-    }
-    public RouteOptimizationResult(Shipment shipment,Double optimizedDistanceKm, Double estimatedFuelUsageL) {
-        this.shipment = shipment;
-        this.optimizedDistanceKm = optimizedDistanceKm;
-        this.estimatedFuelUsageL = estimatedFuelUsageL;
-    }
+    
 }

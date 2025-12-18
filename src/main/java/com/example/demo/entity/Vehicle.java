@@ -10,6 +10,14 @@ public class Vehicle {
     private String vehicleNumber;
     private Double capacityKg;
     private Double fuelEfficiency;
+        public Vehicle() {
+    }
+    public Vehicle(User user, String vehicleNumber, Double capacityKg, Double fuelEfficiency){
+        this.user = user;
+        this.vehicleNumber = vehicleNumber;
+        this.capacityKg = capacityKg;
+        this.fuelEfficiency = fuelEfficiency;
+    }
     public Long getId() {
         return id;
     }
@@ -40,12 +48,5 @@ public class Vehicle {
     public void setFuelEfficiency(Double fuelEfficiency){
         this.fuelEfficiency = fuelEfficiency;
     }
-    public Vehicle() {
-    }
-    public Vehicle(User user, String vehicleNumber, Double capacityKg, Double fuelEfficiency){
-        this.user = user;
-        this.vehicleNumber = vehicleNumber;
-        this.capacityKg = capacityKg;
-        this.fuelEfficiency = fuelEfficiency;
-    }
+
 }
