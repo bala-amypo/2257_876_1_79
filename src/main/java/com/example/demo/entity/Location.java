@@ -40,13 +40,18 @@ public class Location {
     }
     public Shipment() {
     }
-    public Shipment(Vehicle vehicle, Location pickupLocation, Location dropLocation,
-                    Double weightKg,
-                    LocalDate scheduledDate) {
+    public Shipment(Vehicle vehicle, Location pickupLocation, Location dropLocation,Double weightKg, LocalDate scheduledDate){
         this.vehicle = vehicle;
         this.pickupLocation = pickupLocation;
         this.dropLocation = dropLocation;
         this.weightKg = weightKg;
         this.scheduledDate = scheduledDate;
+    }
+     public RouteOptimizationResult() {
+    }
+    public RouteOptimizationResult(Shipment shipment, Double optimizedDistanceKm,Double estimatedFuelUsageL) {
+        this.shipment = shipment;
+        this.optimizedDistanceKm = optimizedDistanceKm;
+        this.estimatedFuelUsageL = estimatedFuelUsageL;
     }
 }
