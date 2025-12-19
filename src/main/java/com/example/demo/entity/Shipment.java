@@ -1,19 +1,31 @@
 package com.example.demo.entity;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
-
+import jakarta.persistence.*;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import java.time.LocalDate;
-
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+@Entity
+@Table(name = "shipments")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class Shipment {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "vehicle_id")
+    private Vehicle vehicle;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "pickup_location_id")
+    private Location pickupLocation;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "drop_location_id")
+    private Location dropLocation;
+    @NotNull
+    @Positive
+    private Double weightKg;
+    @NotNull
+    private LocalDate scheduledDate;
+}
