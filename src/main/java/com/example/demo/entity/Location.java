@@ -1,42 +1,22 @@
 package com.example.demo.entity;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
+import lombok.*;
 @Entity
 @Table(name = "locations")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Location {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String address;
-    private Double latitude;
-    private Double longitude;
-    public Location() {}
-    public Location(String address, Double latitude, Double longitude) {
-        this.address = address;
-        this.latitude = latitude;
-        this.longitude = longitude;
-    }
-    public Long getId() {
-        return id;
-    }
-    public String getAddress() {
-        return address;
-    }
-    public Double getLatitude() {
-        return latitude;
-    }
-    public Double getLongitude() {
-        return longitude;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
-    public void setAddress(String address) {
-        this.address = address;
-    }
-    public void setLatitude(Double latitude) {
-        this.latitude = latitude;
-    }
-    public void setLongitude(Double longitude) {
-        this.longitude = longitude;
-    }
+@Id
+@GeneratedValue(strategy = GenerationType.IDENTITY)
+private Long id;
+@NotBlank
+@Size(min = 2, max = 100)
+private String name;
+@NotNull
+private Double latitude;
+@NotNull
+private Double longitude;
 }
