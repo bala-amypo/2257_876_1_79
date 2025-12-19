@@ -1,30 +1,39 @@
 package com.example.demo.service.impl;
+
 import com.example.demo.entity.RouteOptimizationResult;
-import com.example.demo.repository.RouteOptimizationResultRepository;
+import com.example.demo.entity.Shipment;
 import com.example.demo.service.RouteOptimizationResultService;
+import com.example.demo.service.RouteOptimizationService;
 import org.springframework.stereotype.Service;
-import java.util.List;
+
+import java.time.LocalDateTime;
+
 @Service
-public class RouteOptimizationResultServiceImpl implements RouteOptimizationResultService {
-    private final RouteOptimizationResultRepository repository;
-    public RouteOptimizationResultServiceImpl(
-            RouteOptimizationResultRepository repository) {
-        this.repository = repository;
+public class RouteOptimizationServiceImpl
+        implements RouteOptimizationService {
+
+    private final RouteOptimizationResultService resultService;
+
+    public RouteOptimizationServiceImpl(
+            RouteOptimizationResultService resultService) {
+        this.resultService = resultService;
     }
 
     @Override
-    public RouteOptimizationResult save(RouteOptimizationResult result) {
-        return repository.save(result);
-    }
+    public RouteOptimizationResult optimizeRoute(Shipment shipment) {
 
-    @Override
-    public RouteOptimizationResult getById(Long id) {
-        return repository.findById(id)
-                .orElseThrow(() ->
-                        new RuntimeException("RouteOptimizationResult not found with id: " + id));
-    }
-    @Override
-    public List<RouteOptimizationResult> getAll() {
-        return repository.findAll();
+        double distance = 120.0;
+        double fuelCost = distance * 5;
+
+        RouteOptimizationResult result =
+                new RouteOptimizationResult(
+                        null,
+                        shipment,
+                        distance,
+                        fuelCost,
+                        LocalDateTime.now()
+                );
+
+        return resultService.save(result);
     }
 }
