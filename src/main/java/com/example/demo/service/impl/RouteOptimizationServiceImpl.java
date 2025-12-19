@@ -2,7 +2,7 @@ package com.example.demo.service.impl;
 
 import com.example.demo.entity.RouteOptimizationResult;
 import com.example.demo.entity.Shipment;
-import com.example.demo.service.RouteOptimizationResultService;
+import com.example.demo.repository.RouteOptimizationResultRepository;
 import com.example.demo.service.RouteOptimizationService;
 import org.springframework.stereotype.Service;
 
@@ -12,11 +12,11 @@ import java.time.LocalDateTime;
 public class RouteOptimizationServiceImpl
         implements RouteOptimizationService {
 
-    private final RouteOptimizationResultService resultService;
+    private final RouteOptimizationResultRepository repository;
 
     public RouteOptimizationServiceImpl(
-            RouteOptimizationResultService resultService) {
-        this.resultService = resultService;
+            RouteOptimizationResultRepository repository) {
+        this.repository = repository;
     }
 
     @Override
@@ -34,6 +34,6 @@ public class RouteOptimizationServiceImpl
                         LocalDateTime.now()
                 );
 
-        return resultService.save(result);
+        return repository.save(result);
     }
 }
