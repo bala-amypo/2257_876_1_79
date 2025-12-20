@@ -11,15 +11,14 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 
 @Service
-public class RouteOptimizationServiceImpl
-        implements RouteOptimizationService {
+public class RouteOptimizationServiceImpl implements RouteOptimizationService {
 
     private final ShipmentRepository shipmentRepository;
     private final RouteOptimizationResultRepository resultRepository;
 
-    public RouteOptimizationServiceImpl(
-            ShipmentRepository shipmentRepository,
-            RouteOptimizationResultRepository resultRepository) {
+    // ✅ Constructor Injection
+    public RouteOptimizationServiceImpl(ShipmentRepository shipmentRepository,
+                                        RouteOptimizationResultRepository resultRepository) {
         this.shipmentRepository = shipmentRepository;
         this.resultRepository = resultRepository;
     }
@@ -27,24 +26,32 @@ public class RouteOptimizationServiceImpl
     @Override
     public RouteOptimizationResult optimizeRoute(Long shipmentId) {
 
-        // 1️⃣ Fetch shipment
         Shipment shipment = shipmentRepository.findById(shipmentId)
                 .orElseThrow(() ->
                         new ResourceNotFoundException("Shipment not found"));
 
-        // 2️⃣ Optimization logic
-        double distance = 120.0;
-        double fuelCost = distance * 5;
-
-        RouteOptimizationResult result = new RouteOptimizationResult(
-                null,
-                shipment,
-                distance,
-                fuelCost,
-                LocalDateTime.now()
+        // ✅ Dummy distance calculation (> 0)
+        double distance = Math.hypot(
+                shipment.getPickupLocation().getLatitude()
+                        - shipment.getDropLocation().getLatitude(),
+                shipment.getPickupLocation().getLongitude()
+                        - shipment.getDropLocation().getLongitude()
         );
 
-        // 3️⃣ Save result
+        if (distance <= 0) {
+            distance = 10.0;
+        }
+
+        double fuelUsage = distance / shipment.getVehicle().getFuelEfficiency();
+
+        RouteOptimizationResult result =
+                new RouteOptimizationResult(
+                        shipment,
+                        distance,
+                        fuelUsage,
+                        LocalDateTime.now()
+                );
+
         return resultRepository.save(result);
     }
 
