@@ -28,11 +28,9 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Vehicle> vehicles;
 
-    // 🔹 Default constructor
     public User() {
     }
 
-    // 🔹 Parameterized constructor
     public User(String name, String email, String password, String role) {
         this.name = name;
         this.email = email;
@@ -40,9 +38,12 @@ public class User {
         this.role = role;
     }
 
-    // 🔹 Getters and Setters
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -53,14 +54,10 @@ public class User {
         this.name = name;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getEmail() {
         return email;
     }
-    
+
     public void setEmail(String email) {
         this.email = email;
     }
@@ -68,7 +65,7 @@ public class User {
     public String getPassword() {
         return password;
     }
-    
+
     public void setPassword(String password) {
         this.password = password;
     }
@@ -76,10 +73,16 @@ public class User {
     public String getRole() {
         return role;
     }
-    
+
     public void setRole(String role) {
         this.role = role;
     }
 
     public List<Vehicle> getVehicles() {
+        return vehicles;
+    }
+
+    public void setVehicles(List<Vehicle> vehicles) {
+        this.vehicles = vehicles;
+    }
 }
