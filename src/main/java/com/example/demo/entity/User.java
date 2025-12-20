@@ -82,3 +82,4 @@ public class User {
     }
 
     public List<Vehicle> getVehicles() {
+}
