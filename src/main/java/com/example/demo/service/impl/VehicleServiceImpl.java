@@ -16,9 +16,9 @@ public class VehicleServiceImpl implements VehicleService {
     private final VehicleRepository vehicleRepository;
     private final UserRepository userRepository;
 
-    public VehicleServiceImpl(
-            VehicleRepository vehicleRepository,
-            UserRepository userRepository) {
+    // Constructor injection ONLY
+    public VehicleServiceImpl(VehicleRepository vehicleRepository,
+                              UserRepository userRepository) {
         this.vehicleRepository = vehicleRepository;
         this.userRepository = userRepository;
     }
@@ -26,22 +26,21 @@ public class VehicleServiceImpl implements VehicleService {
     @Override
     public Vehicle addVehicle(Long userId, Vehicle vehicle) {
 
+        // Fetch user
         User user = userRepository.findById(userId)
                 .orElseThrow(() ->
                         new ResourceNotFoundException("User not found"));
 
+        // Validate capacity
         if (vehicle.getCapacityKg() == null || vehicle.getCapacityKg() <= 0) {
-            throw new IllegalArgumentException("Capacity is invalid");
+            throw new IllegalArgumentException("Capacity");
         }
 
+        // Assign owner
         vehicle.setUser(user);
 
-        try {
-            return vehicleRepository.save(vehicle);
-        } catch (Exception e) {
-            // ✅ Tests look for word "constraint"
-            throw new IllegalArgumentException("vehicleNumber constraint violated");
-        }
+        // Save (vehicleNumber uniqueness enforced by DB)
+        return vehicleRepository.save(vehicle);
     }
 
     @Override
