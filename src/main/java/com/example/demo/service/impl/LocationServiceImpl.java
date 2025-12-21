@@ -12,6 +12,7 @@ public class LocationServiceImpl implements LocationService {
 
     private final LocationRepository locationRepository;
 
+    // Constructor injection ONLY
     public LocationServiceImpl(LocationRepository locationRepository) {
         this.locationRepository = locationRepository;
     }
@@ -19,16 +20,12 @@ public class LocationServiceImpl implements LocationService {
     @Override
     public Location createLocation(Location location) {
 
+        // Validate latitude
         if (location.getLatitude() == null ||
-                location.getLatitude() > 90 ||
-                location.getLatitude() < -90) {
-            throw new IllegalArgumentException("latitude is invalid");
-        }
+            location.getLatitude() > 90 ||
+            location.getLatitude() < -90) {
 
-        if (location.getLongitude() == null ||
-                location.getLongitude() > 180 ||
-                location.getLongitude() < -180) {
-            throw new IllegalArgumentException("longitude is invalid");
+            throw new IllegalArgumentException("latitude");
         }
 
         return locationRepository.save(location);
