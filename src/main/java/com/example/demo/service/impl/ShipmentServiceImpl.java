@@ -9,17 +9,12 @@ import com.example.demo.repository.ShipmentRepository;
 import com.example.demo.repository.VehicleRepository;
 import com.example.demo.service.ShipmentService;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDate;
-
 @Service
 public class ShipmentServiceImpl implements ShipmentService {
-
     private final ShipmentRepository shipmentRepository;
     private final VehicleRepository vehicleRepository;
     private final LocationRepository locationRepository;
-
-    // ✅ Constructor Injection
     public ShipmentServiceImpl(ShipmentRepository shipmentRepository,
                                VehicleRepository vehicleRepository,
                                LocationRepository locationRepository) {
@@ -32,7 +27,6 @@ public class ShipmentServiceImpl implements ShipmentService {
         Vehicle vehicle = vehicleRepository.findById(vehicleId)
                 .orElseThrow(() ->
                         new ResourceNotFoundException("Vehicle not found"));
-
         Location pickup = locationRepository.findById(
                 shipment.getPickupLocation().getId())
                 .orElseThrow(() ->
