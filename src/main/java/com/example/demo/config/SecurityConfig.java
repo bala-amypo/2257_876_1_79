@@ -1,27 +1,20 @@
+package com.example.demo.config;
+
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 public class SecurityConfig {
 
-    // Allow public /users/register and disable default login
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            .csrf().disable()
-            .authorizeHttpRequests()
-                .requestMatchers("/users/register").permitAll()
-                .anyRequest().authenticated()
-            .and()
-            .formLogin().disable()
-            .httpBasic().disable();
+            .csrf(csrf -> csrf.disable()) // Disable CSRF
+            .authorizeHttpRequests(auth -> auth
+                .anyRequest().permitAll()   // Allow all requests
+            );
         return http.build();
-    }
-
-    // ✅ Add this PasswordEncoder bean
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
     }
 }
