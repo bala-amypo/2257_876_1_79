@@ -10,12 +10,10 @@ public class LocationController {
     public LocationController(LocationService locationService) {
         this.locationService = locationService;
     }
-
     @PostMapping
     public Location createLocation(@RequestBody Location location) {
         return locationService.createLocation(location);
     }
-
     @GetMapping
     public List<Location> getAllLocations() {
         return locationService.getAllLocations();
