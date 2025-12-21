@@ -9,8 +9,4 @@ public interface UserService {
     User findByEmail(String email);
 
     User findById(Long id);
-
-    // Other CRUD operations (EMPTY)
-    default void updateUser(Long id) {}
-    default void deleteUser(Long id) {}
 }
