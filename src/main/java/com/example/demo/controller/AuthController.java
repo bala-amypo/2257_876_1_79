@@ -6,12 +6,12 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/users")
-public class UserController {
+public class AuthController {
 
     private final UserService userService;
 
     // Constructor injection
-    public UserController(UserService userService) {
+    public AuthController(UserService userService) {
         this.userService = userService;
     }
 
