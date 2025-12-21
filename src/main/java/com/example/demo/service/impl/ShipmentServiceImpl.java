@@ -27,10 +27,8 @@ public class ShipmentServiceImpl implements ShipmentService {
         this.vehicleRepository = vehicleRepository;
         this.locationRepository = locationRepository;
     }
-
     @Override
     public Shipment createShipment(Long vehicleId, Shipment shipment) {
-
         Vehicle vehicle = vehicleRepository.findById(vehicleId)
                 .orElseThrow(() ->
                         new ResourceNotFoundException("Vehicle not found"));
@@ -44,24 +42,18 @@ public class ShipmentServiceImpl implements ShipmentService {
                 shipment.getDropLocation().getId())
                 .orElseThrow(() ->
                         new ResourceNotFoundException("Location not found"));
-
-        // ✅ Weight validation
         if (shipment.getWeightKg() > vehicle.getCapacityKg()) {
             throw new IllegalArgumentException("Weight exceeds vehicle capacity");
         }
-
-        // ✅ Date validation
         if (shipment.getScheduledDate().isBefore(LocalDate.now())) {
             throw new IllegalArgumentException("Date cannot be in the past");
         }
-
         shipment.setVehicle(vehicle);
         shipment.setPickupLocation(pickup);
         shipment.setDropLocation(drop);
 
         return shipmentRepository.save(shipment);
     }
-
     @Override
     public Shipment getShipment(Long shipmentId) {
         return shipmentRepository.findById(shipmentId)
