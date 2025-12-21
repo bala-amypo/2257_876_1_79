@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/users")
-public class AuthController {
+public class AuthController {  // ✅ class name now matches file name
 
     private final UserService userService;
 
@@ -15,7 +15,7 @@ public class AuthController {
         this.userService = userService;
     }
 
-    // ✅ ONLY REQUIRED HTTP METHOD
+    // ONLY REQUIRED HTTP METHOD
     @PostMapping("/register")
     public User registerUser(@RequestBody User user) {
         return userService.registerUser(user);
