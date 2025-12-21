@@ -4,20 +4,16 @@ import com.example.demo.entity.User;
 import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.service.UserService;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
 
-    // Constructor injection only
-    public UserServiceImpl(UserRepository userRepository,
-                           PasswordEncoder passwordEncoder) {
+    // Constructor injection
+    public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -28,8 +24,8 @@ public class UserServiceImpl implements UserService {
             user.setRole("USER");
         }
 
-        // Hash password (optional but safe)
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        // Store password as plain text (optional, not recommended for production)
+        // user.setPassword(user.getPassword());
 
         return userRepository.save(user);
     }
