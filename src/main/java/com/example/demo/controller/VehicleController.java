@@ -14,7 +14,6 @@ public class VehicleController {
     public Vehicle addVehicle(
             @PathVariable Long userId,
             @RequestBody Vehicle vehicle) {
-
         return vehicleService.addVehicle(userId, vehicle);
     }
     @GetMapping("/user/{userId}")
