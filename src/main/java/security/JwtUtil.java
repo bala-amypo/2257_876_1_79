@@ -3,31 +3,40 @@ package com.example.demo.security;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Component;
-
+import java.security.Key;
 import java.util.Date;
-
 @Component
 public class JwtUtil {
-
-    private final String SECRET_KEY = "secret123";
-
-    public String generateToken(Long userId, String email, String role) {
+    private static final String SECRET_KEY = "mysecretkeymysecretkeymysecretkey123";
+    private final Key key = Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
+    Token(Long userId, String email, String role) {
         return Jwts.builder()
-                .claim("userId", userId)
-                .claim("email", email)
-                .claim("role", role)
                 .setSubject(email)
-                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .claim("userId", userId)
+                .claim("role", role)
+                .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24))
-                .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
+                .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
     }
-
     public Claims extractClaims(String token) {
-        return Jwts.parser()
-                .setSigningKey(SECRET_KEY)
+        return Jwts.parserBuilder()
+                .setSigningKey(key)
+                .build()
                 .parseClaimsJws(token)
                 .getBody();
+    }
+    public String extractUsername(String token) {
+        return extractClaims(token).getSubject();
+    }
+    public boolean validateToken(String token) {
+        try {
+            extractClaims(token);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }
