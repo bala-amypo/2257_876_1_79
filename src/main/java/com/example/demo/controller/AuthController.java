@@ -1,23 +1,45 @@
 package com.example.demo.controller;
-
 import com.example.demo.entity.User;
+import com.example.demo.security.JwtUtil;
 import com.example.demo.service.UserService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-
+import java.util.*;
 @RestController
-@RequestMapping("/users")
-public class AuthController {  // ✅ class name now matches file name
-
+@RequestMapping("/auth")
+public class AuthController {
     private final UserService userService;
-
-    // Constructor injection
-    public AuthController(UserService userService) {
+    private final JwtUtil jwtUtil;
+    private final PasswordEncoder passwordEncoder;
+    public AuthController(UserService userService,
+                          JwtUtil jwtUtil,
+                          PasswordEncoder passwordEncoder) {
         this.userService = userService;
+        this.jwtUtil = jwtUtil;
+        this.passwordEncoder = passwordEncoder;
     }
-
-    // ONLY REQUIRED HTTP METHOD
     @PostMapping("/register")
-    public User registerUser(@RequestBody User user) {
+    public User register(@RequestBody User user) {
         return userService.registerUser(user);
+    }
+    @PostMapping("/login")
+    public Map<String, Object> login(@RequestBody Map<String, String> request) {
+        String email = request.get("email");
+        String password = request.get("password");
+        User user = userService.findByEmail(email);
+        if (!passwordEncoder.matches(password, user.getPassword())) {
+            throw new RuntimeException("Invalid credentials");
+        }
+        String token = jwtUtil.generateToken(
+                user.getId(),
+                user.getEmail(),
+                user.getRole()
+        );
+        Map<String, Object> response = new HashMap<>();
+        response.put("token", token);
+        response.put("userId", user.getId());
+        response.put("email", user.getEmail());
+        response.put("role", user.getRole());
+        return response;
     }
 }

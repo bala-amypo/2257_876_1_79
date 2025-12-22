@@ -1,21 +1,19 @@
 package com.example.demo.entity;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.*;
 @Entity
-@Table(name = "vehicles")
+@Table(name = "locations")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Vehicle {
+public class Location {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-    @Column(unique = true)
-    private String vehicleNumber;
-    private Double capacityKg;
-    private Double fuelEfficiency;
+    private String name;
+    private Double latitude;
+    private Double longitude;
 }
+
