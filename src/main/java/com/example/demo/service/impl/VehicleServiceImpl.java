@@ -30,8 +30,6 @@ public class VehicleServiceImpl implements VehicleService {
                         new ResourceNotFoundException("User not found"));
 
         vehicle.setUser(user);
-
-        // ✅ FIX: return required
         return vehicleRepository.save(vehicle);
     }
 
