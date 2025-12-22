@@ -39,3 +39,11 @@ public class VehicleServiceImpl implements VehicleService {
                         new ResourceNotFoundException("Vehicle not found"));
     }
 }
+
+
+
+User user = userRepository.findById(userId)
+        .orElseThrow(() -> new RuntimeException("User not found"));
+
+vehicle.setUser(user);
+vehicleRepository.save(vehicle);
