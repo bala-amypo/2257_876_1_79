@@ -1,16 +1,22 @@
 package com.example.demo.controller;
+
+import org.springframework.web.bind.annotation.*;
+
 import com.example.demo.entity.RouteOptimizationResult;
 import com.example.demo.service.RouteOptimizationService;
-import org.springframework.web.bind.annotation.*;
+
 @RestController
 @RequestMapping("/optimize")
 public class RouteOptimizationController {
+
     private final RouteOptimizationService routeOptimizationService;
+
     public RouteOptimizationController(RouteOptimizationService routeOptimizationService) {
         this.routeOptimizationService = routeOptimizationService;
     }
+
     @PostMapping("/{shipmentId}")
-    public RouteOptimizationResult optimize(@PathVariable Long shipmentId) {
+    public RouteOptimizationResult optimizeRoute(@PathVariable Long shipmentId) {
         return routeOptimizationService.optimizeRoute(shipmentId);
     }
     @GetMapping("/result/{resultId}")
