@@ -19,14 +19,20 @@ public class VehicleServiceImpl implements VehicleService {
     }
     @Override
     public Vehicle addVehicle(Long userId, Vehicle vehicle) {
+
         User user = userRepository.findById(userId)
-                .orElseThrow(() ->
-                        new ResourceNotFoundException("User not found"));
-        if (vehicle.getCapacityKg() == null || vehicle.getCapacityKg() <= 0) {
-            throw new IllegalArgumentException("Capacity must be positive");
-        }
+        .orElseThrow(() -> new RuntimeException("User not found"));
+
         vehicle.setUser(user);
-        return vehicleRepository.save(vehicle);
+        vehicleRepository.save(vehicle);
+        // User user = userRepository.findById(userId)
+        //         .orElseThrow(() ->
+        //                 new ResourceNotFoundException("User not found"));
+        // if (vehicle.getCapacityKg() == null || vehicle.getCapacityKg() <= 0) {
+        //     throw new IllegalArgumentException("Capacity must be positive");
+        // }
+        // vehicle.setUser(user);
+        // return vehicleRepository.save(vehicle);
     }
     @Override
     public List<Vehicle> getVehiclesByUser(Long userId) {
@@ -42,8 +48,4 @@ public class VehicleServiceImpl implements VehicleService {
 
 
 
-User user = userRepository.findById(userId)
-        .orElseThrow(() -> new RuntimeException("User not found"));
 
-vehicle.setUser(user);
-vehicleRepository.save(vehicle);
