@@ -7,37 +7,39 @@ import com.example.demo.repository.UserRepository;
 import com.example.demo.repository.VehicleRepository;
 import com.example.demo.service.VehicleService;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
+
 @Service
 public class VehicleServiceImpl implements VehicleService {
+
     private final VehicleRepository vehicleRepository;
     private final UserRepository userRepository;
+
     public VehicleServiceImpl(VehicleRepository vehicleRepository,
                               UserRepository userRepository) {
         this.vehicleRepository = vehicleRepository;
         this.userRepository = userRepository;
     }
+
     @Override
     public Vehicle addVehicle(Long userId, Vehicle vehicle) {
 
         User user = userRepository.findById(userId)
-        .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("User not found"));
 
         vehicle.setUser(user);
-        vehicleRepository.save(vehicle);
-        // User user = userRepository.findById(userId)
-        //         .orElseThrow(() ->
-        //                 new ResourceNotFoundException("User not found"));
-        // if (vehicle.getCapacityKg() == null || vehicle.getCapacityKg() <= 0) {
-        //     throw new IllegalArgumentException("Capacity must be positive");
-        // }
-        // vehicle.setUser(user);
-        // return vehicleRepository.save(vehicle);
+
+        // ✅ FIX: return required
+        return vehicleRepository.save(vehicle);
     }
+
     @Override
     public List<Vehicle> getVehiclesByUser(Long userId) {
         return vehicleRepository.findByUserId(userId);
     }
+
     @Override
     public Vehicle findById(Long id) {
         return vehicleRepository.findById(id)
@@ -45,7 +47,3 @@ public class VehicleServiceImpl implements VehicleService {
                         new ResourceNotFoundException("Vehicle not found"));
     }
 }
-
-
-
-
