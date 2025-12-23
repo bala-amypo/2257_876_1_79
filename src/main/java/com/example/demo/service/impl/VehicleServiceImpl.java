@@ -1,9 +1,6 @@
 package com.example.demo.service.impl;
-
 import java.util.List;
-
 import org.springframework.stereotype.Service;
-
 import com.example.demo.entity.User;
 import com.example.demo.entity.Vehicle;
 import com.example.demo.exception.ResourceNotFoundException;
@@ -22,7 +19,6 @@ public class VehicleServiceImpl implements VehicleService {
         this.vehicleRepository = vehicleRepository;
         this.userRepository = userRepository;
     }
-
     @Override
     public Vehicle addVehicle(Long userId, Vehicle vehicle) {
 
@@ -37,12 +33,10 @@ public class VehicleServiceImpl implements VehicleService {
         vehicle.setUser(user);
         return vehicleRepository.save(vehicle);
     }
-
     @Override
     public List<Vehicle> getVehiclesByUser(Long userId) {
         return vehicleRepository.findByUserId(userId);
-    }
-
+    }\
     @Override
     public Vehicle findById(Long id) {
         return vehicleRepository.findById(id)

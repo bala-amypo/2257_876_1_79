@@ -1,24 +1,17 @@
 package com.example.demo.entity;
-
 import jakarta.persistence.*;
-
 @Entity
 @Table(name = "vehicles")
 public class Vehicle {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String vehicleNumber;
     private Double capacityKg;
     private Double fuelEfficiency;
-
     @ManyToOne
     private User user;
-
     public Vehicle() {}
-
     public Long getId() { 
         return id; 
     }
@@ -34,7 +27,6 @@ public class Vehicle {
     public User getUser() { 
         return user; 
     }
-
     public void setId(Long id) { 
         this.id = id; 
     }

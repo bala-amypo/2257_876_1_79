@@ -1,30 +1,21 @@
 package com.example.demo.entity;
-
 import java.time.LocalDate;
 import jakarta.persistence.*;
-
 @Entity
 @Table(name = "shipments")
 public class Shipment {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @ManyToOne
     private Vehicle vehicle;
-
     @ManyToOne
     private Location pickupLocation;
-
     @ManyToOne
     private Location dropLocation;
-
     private Double weightKg;
     private LocalDate scheduledDate;
-
     public Shipment() {}
-
     public Long getId() { 
         return id; 
     }
