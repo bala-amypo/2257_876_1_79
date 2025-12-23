@@ -36,7 +36,7 @@ public class VehicleServiceImpl implements VehicleService {
     @Override
     public List<Vehicle> getVehiclesByUser(Long userId) {
         return vehicleRepository.findByUserId(userId);
-    }\
+    }
     @Override
     public Vehicle findById(Long id) {
         return vehicleRepository.findById(id)
