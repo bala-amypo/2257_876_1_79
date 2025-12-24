@@ -18,12 +18,6 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
-    @Bean
-    public JwtUtil jwtUtil() {
-        return new JwtUtil("my-secret-key-my-secret-key", 86400000);
-    }
-
     @Bean
     public JwtFilter jwtFilter(JwtUtil jwtUtil) {
         return new JwtFilter(jwtUtil);
