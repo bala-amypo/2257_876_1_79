@@ -1,12 +1,12 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 
 @Entity
-@Getter
-@Setter
-@Builder
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Vehicle {
@@ -16,11 +16,6 @@ public class Vehicle {
     private Long id;
 
     private String vehicleNumber;
-    private String vehicleType;
 
-    private double capacityKg;        // REQUIRED
-    private double fuelEfficiency;
-
-    @ManyToOne
-    private User user;                // REQUIRED
+    private double fuelEfficiency; // km per liter
 }

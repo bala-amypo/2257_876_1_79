@@ -16,16 +16,18 @@ public class VehicleController {
         this.vehicleService = vehicleService;
     }
 
-    // POST /vehicles/{userId}
-    @PostMapping("/{userId}")
-    public Vehicle addVehicle(@PathVariable Long userId,
-                              @RequestBody Vehicle vehicle) {
-        return vehicleService.addVehicle(userId, vehicle);
+    @PostMapping
+    public Vehicle createVehicle(@RequestBody Vehicle vehicle) {
+        return vehicleService.createVehicle(vehicle);
     }
 
-    // GET /vehicles/user/{userId}
-    @GetMapping("/user/{userId}")
-    public List<Vehicle> getVehiclesByUser(@PathVariable Long userId) {
-        return vehicleService.getVehiclesByUser(userId);
+    @GetMapping
+    public List<Vehicle> getAllVehicles() {
+        return vehicleService.getAllVehicles();
+    }
+
+    @GetMapping("/{id}")
+    public Vehicle getVehicle(@PathVariable Long id) {
+        return vehicleService.getVehicleById(id);
     }
 }

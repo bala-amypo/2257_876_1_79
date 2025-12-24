@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface VehicleService {
 
-    Vehicle addVehicle(Long userId, Vehicle vehicle);
+    Vehicle createVehicle(Vehicle vehicle);
 
-    Vehicle findById(Long id);
+    List<Vehicle> getAllVehicles();
 
-    List<Vehicle> getVehiclesByUser(Long userId);
+    Vehicle getVehicleById(Long id);
 }
