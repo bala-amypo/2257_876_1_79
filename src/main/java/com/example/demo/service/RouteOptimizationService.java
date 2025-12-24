@@ -4,7 +4,9 @@ import com.example.demo.entity.RouteOptimizationResult;
 
 public interface RouteOptimizationService {
 
-    RouteOptimizationResult optimizeRoute(Long shipmentId);
-
-    RouteOptimizationResult getResult(Long id);
+    RouteOptimizationResult optimizeRoute(
+            double distance,
+            double fuelEfficiency,
+            double fuelPrice
+    );
 }
