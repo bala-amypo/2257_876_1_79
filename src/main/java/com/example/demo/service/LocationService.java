@@ -6,7 +6,9 @@ import java.util.List;
 
 public interface LocationService {
 
-    Location createLocation(Location location);
+    Location save(Location location);
 
-    List<Location> getAllLocations();
+    List<Location> getAll();
+
+    Location getById(Long id);
 }

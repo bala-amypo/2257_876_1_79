@@ -16,15 +16,18 @@ public class LocationController {
         this.locationService = locationService;
     }
 
-    // POST /locations
     @PostMapping
-    public Location createLocation(@RequestBody Location location) {
-        return locationService.createLocation(location);
+    public Location create(@RequestBody Location location) {
+        return locationService.save(location);
     }
 
-    // GET /locations
     @GetMapping
-    public List<Location> getAllLocations() {
-        return locationService.getAllLocations();
+    public List<Location> getAll() {
+        return locationService.getAll();
+    }
+
+    @GetMapping("/{id}")
+    public Location getById(@PathVariable Long id) {
+        return locationService.getById(id);
     }
 }
