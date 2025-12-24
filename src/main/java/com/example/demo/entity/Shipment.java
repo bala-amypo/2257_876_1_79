@@ -1,14 +1,12 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
-
-import java.time.LocalDate;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 
 @Entity
-@Getter
-@Setter
-@Builder
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Shipment {
@@ -17,16 +15,9 @@ public class Shipment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private double weightKg;
+    private String source;
 
-    private LocalDate scheduledDate; // 🔴 MUST BE LocalDate
+    private String destination;
 
-    @ManyToOne
-    private Vehicle vehicle;
-
-    @ManyToOne
-    private Location pickupLocation;
-
-    @ManyToOne
-    private Location dropLocation;
+    private double distance;
 }

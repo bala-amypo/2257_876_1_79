@@ -4,6 +4,8 @@ import com.example.demo.entity.Shipment;
 import com.example.demo.service.ShipmentService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/shipments")
 public class ShipmentController {
@@ -14,16 +16,18 @@ public class ShipmentController {
         this.shipmentService = shipmentService;
     }
 
-    // POST /shipments/{vehicleId}
-    @PostMapping("/{vehicleId}")
-    public Shipment createShipment(@PathVariable Long vehicleId,
-                                   @RequestBody Shipment shipment) {
-        return shipmentService.createShipment(vehicleId, shipment);
+    @PostMapping
+    public Shipment createShipment(@RequestBody Shipment shipment) {
+        return shipmentService.createShipment(shipment);
     }
 
-    // GET /shipments/{shipmentId}
-    @GetMapping("/{shipmentId}")
-    public Shipment getShipment(@PathVariable Long shipmentId) {
-        return shipmentService.getShipment(shipmentId);
+    @GetMapping
+    public List<Shipment> getAllShipments() {
+        return shipmentService.getAllShipments();
+    }
+
+    @GetMapping("/{id}")
+    public Shipment getShipment(@PathVariable Long id) {
+        return shipmentService.getShipmentById(id);
     }
 }
