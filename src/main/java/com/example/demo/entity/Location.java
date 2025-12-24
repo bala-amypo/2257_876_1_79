@@ -1,9 +1,14 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
-@Table(name = "locations")
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Location {
 
     @Id
@@ -11,50 +16,8 @@ public class Location {
     private Long id;
 
     private String name;
-    private Double latitude;
-    private Double longitude;
 
-    // No-arg constructor
-    public Location() {
-    }
+    private double latitude;
 
-    // Parameterized constructor
-    public Location(String name, Double latitude, Double longitude) {
-        this.name = name;
-        this.latitude = latitude;
-        this.longitude = longitude;
-    }
-
-    // Getters and setters
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Double getLatitude() {
-        return latitude;
-    }
-
-    public Double getLongitude() {
-        return longitude;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setLatitude(Double latitude) {
-        this.latitude = latitude;
-    }
-
-    public void setLongitude(Double longitude) {
-        this.longitude = longitude;
-    }
+    private double longitude;
 }
