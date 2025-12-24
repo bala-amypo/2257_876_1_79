@@ -16,12 +16,11 @@ public class Vehicle {
     private Long id;
 
     private String vehicleNumber;
-
     private String vehicleType;
 
-    private double capacity;
-
+    private double capacityKg;        // REQUIRED
     private double fuelEfficiency;
 
-    private Long userId;
+    @ManyToOne
+    private User user;                // REQUIRED
 }
