@@ -27,6 +27,11 @@ public class JwtUtil {
                 .compact();
     }
 
+    // 🔴 REQUIRED BY JwtFilter
+    public Claims extractAllClaims(String token) {
+        return validateToken(token).getBody();
+    }
+
     public Jws<Claims> validateToken(String token) {
         return Jwts.parserBuilder()
                 .setSigningKey(key)
