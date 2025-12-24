@@ -3,7 +3,7 @@ package com.example.demo.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
 @Getter
@@ -17,15 +17,16 @@ public class Shipment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private double weightKg;                 // REQUIRED
-    private LocalDateTime scheduledDate;     // REQUIRED
+    private double weightKg;
+
+    private LocalDate scheduledDate; // 🔴 MUST BE LocalDate
 
     @ManyToOne
-    private Location pickupLocation;         // REQUIRED
+    private Vehicle vehicle;
 
     @ManyToOne
-    private Location dropLocation;           // REQUIRED
+    private Location pickupLocation;
 
     @ManyToOne
-    private Vehicle vehicle;                 // REQUIRED
+    private Location dropLocation;
 }

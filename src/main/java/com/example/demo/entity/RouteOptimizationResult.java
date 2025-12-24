@@ -20,20 +20,8 @@ public class RouteOptimizationResult {
     @ManyToOne
     private Shipment shipment;
 
-    private double totalDistance;
-    private double fuelUsed;
-    private LocalDateTime optimizedAt;
+    private double optimizedDistanceKm;      // 🔴 EXACT NAME
+    private double estimatedFuelUsageL;      // 🔴 EXACT NAME
 
-    // REQUIRED BY SERVICE
-    public RouteOptimizationResult(
-            Shipment shipment,
-            double totalDistance,
-            double fuelUsed,
-            LocalDateTime optimizedAt
-    ) {
-        this.shipment = shipment;
-        this.totalDistance = totalDistance;
-        this.fuelUsed = fuelUsed;
-        this.optimizedAt = optimizedAt;
-    }
+    private LocalDateTime generatedAt;        // 🔴 REQUIRED FIELD
 }
