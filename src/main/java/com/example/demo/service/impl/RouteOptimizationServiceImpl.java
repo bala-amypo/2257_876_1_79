@@ -1,8 +1,10 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.entity.*;
+import com.example.demo.entity.RouteOptimizationResult;
+import com.example.demo.entity.Shipment;
 import com.example.demo.exception.ResourceNotFoundException;
-import com.example.demo.repository.*;
+import com.example.demo.repository.RouteOptimizationResultRepository;
+import com.example.demo.repository.ShipmentRepository;
 import com.example.demo.service.RouteOptimizationService;
 import org.springframework.stereotype.Service;
 
@@ -34,7 +36,12 @@ public class RouteOptimizationServiceImpl implements RouteOptimizationService {
         double fuel = distance / shipment.getVehicle().getFuelEfficiency();
 
         RouteOptimizationResult result =
-                new RouteOptimizationResult(shipment, distance, fuel, LocalDateTime.now());
+                new RouteOptimizationResult(
+                        shipment,
+                        distance,
+                        fuel,
+                        LocalDateTime.now()
+                );
 
         return resultRepository.save(result);
     }
