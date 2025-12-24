@@ -17,7 +17,12 @@ public class VehicleServiceImpl implements VehicleService {
 
     @Override
     public Vehicle addVehicle(Vehicle vehicle, User user) {
-        vehicle.setUser(user);   // REQUIRED
+        vehicle.setUser(user);
         return vehicleRepository.save(vehicle);
+    }
+
+    @Override
+    public Vehicle findById(Long id) {
+        return vehicleRepository.findById(id).orElse(null);
     }
 }

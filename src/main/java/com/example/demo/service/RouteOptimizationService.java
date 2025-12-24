@@ -1,10 +1,11 @@
 package com.example.demo.service;
 
 import com.example.demo.entity.RouteOptimizationResult;
+import com.example.demo.entity.Shipment;
 
 public interface RouteOptimizationService {
 
-    RouteOptimizationResult optimizeRoute(Long shipmentId);
+    RouteOptimizationResult optimizeRoute(Shipment shipment);
 
-    RouteOptimizationResult getResult(Long resultId);
+    RouteOptimizationResult getResult(Long id);   // 🔴 REQUIRED
 }

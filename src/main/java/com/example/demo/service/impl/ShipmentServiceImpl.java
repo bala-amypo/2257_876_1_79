@@ -15,9 +15,12 @@ public class ShipmentServiceImpl implements ShipmentService {
     }
 
     @Override
-    public Shipment createShipment(Shipment shipment, Vehicle vehicle,
-                                   Location pickup, Location drop) {
-
+    public Shipment createShipment(
+            Shipment shipment,
+            Vehicle vehicle,
+            Location pickup,
+            Location drop
+    ) {
         if (shipment.getWeightKg() > vehicle.getCapacityKg()) {
             throw new RuntimeException("Vehicle capacity exceeded");
         }
@@ -27,5 +30,10 @@ public class ShipmentServiceImpl implements ShipmentService {
         shipment.setDropLocation(drop);
 
         return shipmentRepository.save(shipment);
+    }
+
+    @Override
+    public Shipment getShipment(Long id) {
+        return shipmentRepository.findById(id).orElse(null);
     }
 }
