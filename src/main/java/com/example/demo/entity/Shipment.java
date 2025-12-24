@@ -21,12 +21,20 @@ public class Shipment {
     private Location dropLocation;
 
     private Double weightKg;
+
     private LocalDate scheduledDate;
 
-    public Shipment() {}
+    // No-arg constructor
+    public Shipment() {
+    }
 
-    public Shipment(Vehicle vehicle, Location pickupLocation, Location dropLocation,
-                    Double weightKg, LocalDate scheduledDate) {
+    // Parameterized constructor (EXACT)
+    public Shipment(
+            Vehicle vehicle,
+            Location pickupLocation,
+            Location dropLocation,
+            Double weightKg,
+            LocalDate scheduledDate) {
         this.vehicle = vehicle;
         this.pickupLocation = pickupLocation;
         this.dropLocation = dropLocation;
@@ -34,5 +42,52 @@ public class Shipment {
         this.scheduledDate = scheduledDate;
     }
 
-    // getters and setters
+    // Getters and setters
+    public Long getId() {
+        return id;
+    }
+
+    public Vehicle getVehicle() {
+        return vehicle;
+    }
+
+    public Location getPickupLocation() {
+        return pickupLocation;
+    }
+
+    public Location getDropLocation() {
+        return dropLocation;
+    }
+
+    public Double getWeightKg() {
+        return weightKg;
+    }
+
+    public LocalDate getScheduledDate() {
+        return scheduledDate;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
+    }
+
+    public void setPickupLocation(Location pickupLocation) {
+        this.pickupLocation = pickupLocation;
+    }
+
+    public void setDropLocation(Location dropLocation) {
+        this.dropLocation = dropLocation;
+    }
+
+    public void setWeightKg(Double weightKg) {
+        this.weightKg = weightKg;
+    }
+
+    public void setScheduledDate(LocalDate scheduledDate) {
+        this.scheduledDate = scheduledDate;
+    }
 }
