@@ -5,7 +5,7 @@ import com.example.demo.repository.UserRepository;
 import com.example.demo.service.UserService;
 import org.springframework.stereotype.Service;
 
-@Service   // ⭐ THIS IS CRITICAL
+@Service
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
@@ -20,7 +20,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findByUsername(String username) {
-        return userRepository.findByUsername(username).orElse(null);
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 }

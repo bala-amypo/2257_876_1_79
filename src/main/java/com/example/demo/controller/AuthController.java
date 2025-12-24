@@ -13,35 +13,32 @@ public class AuthController {
     private final UserService userService;
     private final JwtUtil jwtUtil;
 
-    // ✅ Constructor Injection (REQUIRED)
     public AuthController(UserService userService, JwtUtil jwtUtil) {
         this.userService = userService;
         this.jwtUtil = jwtUtil;
     }
 
-    // ✅ Register API
+    // ✅ Register
     @PostMapping("/register")
     public ResponseEntity<User> register(@RequestBody User user) {
-        User savedUser = userService.registerUser(user);
-        return ResponseEntity.ok(savedUser);
+        return ResponseEntity.ok(userService.registerUser(user));
     }
 
-    // ✅ Login API
+    // ✅ Login
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody User user) {
 
-        User dbUser = userService.findByUsername(user.getUsername());
+        User dbUser = userService.findByEmail(user.getEmail());
 
         if (dbUser == null) {
-            return ResponseEntity.badRequest().body("Invalid username");
+            return ResponseEntity.badRequest().body("Invalid email");
         }
 
-        // NOTE: Plain comparison because helper/test usually expects this
         if (!dbUser.getPassword().equals(user.getPassword())) {
             return ResponseEntity.badRequest().body("Invalid password");
         }
 
-        String token = jwtUtil.generateToken(dbUser.getUsername());
+        String token = jwtUtil.generateToken(dbUser.getEmail());
         return ResponseEntity.ok(token);
     }
 }
