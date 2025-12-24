@@ -18,13 +18,11 @@ public class AuthController {
         this.jwtUtil = jwtUtil;
     }
 
-    // ✅ Register
     @PostMapping("/register")
     public ResponseEntity<User> register(@RequestBody User user) {
         return ResponseEntity.ok(userService.registerUser(user));
     }
 
-    // ✅ Login
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody User user) {
 
@@ -38,7 +36,13 @@ public class AuthController {
             return ResponseEntity.badRequest().body("Invalid password");
         }
 
-        String token = jwtUtil.generateToken(dbUser.getEmail());
+        // ✅ CORRECT PARAMETER ORDER
+        String token = jwtUtil.generateToken(
+                dbUser.getId(),
+                dbUser.getEmail(),
+                "USER"
+        );
+
         return ResponseEntity.ok(token);
     }
 }
