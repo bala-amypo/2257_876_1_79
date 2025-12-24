@@ -4,6 +4,7 @@ import com.example.demo.entity.User;
 
 public interface UserService {
 
-    User registerUser(User user);     // REQUIRED
-    User findByEmail(String email);   // REQUIRED
+    User register(User user);
+
+    User findByEmail(String email);
 }
