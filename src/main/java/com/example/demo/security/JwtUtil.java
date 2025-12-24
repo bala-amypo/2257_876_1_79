@@ -12,13 +12,22 @@ import java.util.Date;
 @Component
 public class JwtUtil {
 
-    // ✅ 256-bit key (>= 32 chars)
-    private static final Key SECRET_KEY =
-            Keys.hmacShaKeyFor(
-                    "ThisIsA256BitSecureJwtSecretKeyForTransportAPI".getBytes()
-            );
+    private Key secretKey;
+    private long expiration;
 
-    private static final long EXPIRATION_TIME = 1000 * 60 * 60; // 1 hour
+    // REQUIRED by helper tests
+    public JwtUtil(String secret, long expiration) {
+        this.secretKey = Keys.hmacShaKeyFor(secret.getBytes());
+        this.expiration = expiration;
+    }
+
+    // REQUIRED by Spring
+    public JwtUtil() {
+        this.secretKey = Keys.hmacShaKeyFor(
+                "ThisIsA256BitSecureJwtSecretKeyForTransportAPI".getBytes()
+        );
+        this.expiration = 3600000;
+    }
 
     public String generateToken(Long userId, String email, String role) {
         return Jwts.builder()
@@ -27,14 +36,14 @@ public class JwtUtil {
                 .claim("role", role)
                 .setSubject(email)
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
-                .signWith(SECRET_KEY, SignatureAlgorithm.HS256)
+                .setExpiration(new Date(System.currentTimeMillis() + expiration))
+                .signWith(secretKey, SignatureAlgorithm.HS256)
                 .compact();
     }
 
     public Claims extractAllClaims(String token) {
         return Jwts.parserBuilder()
-                .setSigningKey(SECRET_KEY)
+                .setSigningKey(secretKey)
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
