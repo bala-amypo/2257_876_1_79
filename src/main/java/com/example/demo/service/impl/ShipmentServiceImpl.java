@@ -1,33 +1,49 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.entity.Shipment;
-import com.example.demo.repository.ShipmentRepository;
+import com.example.demo.entity.*;
+import com.example.demo.exception.ResourceNotFoundException;
+import com.example.demo.repository.*;
 import com.example.demo.service.ShipmentService;
-import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.time.LocalDate;
 
-@Service
 public class ShipmentServiceImpl implements ShipmentService {
 
-    private final ShipmentRepository shipmentRepository;
+    private final ShipmentRepository shipmentRepo;
+    private final VehicleRepository vehicleRepo;
+    private final LocationRepository locationRepo;
 
-    public ShipmentServiceImpl(ShipmentRepository shipmentRepository) {
-        this.shipmentRepository = shipmentRepository;
+    public ShipmentServiceImpl(ShipmentRepository s, VehicleRepository v, LocationRepository l) {
+        this.shipmentRepo = s;
+        this.vehicleRepo = v;
+        this.locationRepo = l;
     }
 
     @Override
-    public Shipment createShipment(Shipment shipment) {
-        return shipmentRepository.save(shipment);
+    public Shipment createShipment(Long vehicleId, Shipment shipment) {
+
+        Vehicle vehicle = vehicleRepo.findById(vehicleId)
+                .orElseThrow(() -> new ResourceNotFoundException("Vehicle not found"));
+
+        Location pickup = locationRepo.findById(shipment.getPickupLocation().getId()).orElseThrow();
+        Location drop = locationRepo.findById(shipment.getDropLocation().getId()).orElseThrow();
+
+        if (shipment.getWeightKg() > vehicle.getCapacityKg())
+            throw new IllegalArgumentException("exceeds capacity");
+
+        if (shipment.getScheduledDate().isBefore(LocalDate.now()))
+            throw new IllegalArgumentException("past date");
+
+        shipment.setVehicle(vehicle);
+        shipment.setPickupLocation(pickup);
+        shipment.setDropLocation(drop);
+
+        return shipmentRepo.save(shipment);
     }
 
     @Override
-    public List<Shipment> getAllShipments() {
-        return shipmentRepository.findAll();
-    }
-
-    @Override
-    public Shipment getShipmentById(Long id) {
-        return shipmentRepository.findById(id).orElse(null);
+    public Shipment getShipment(Long id) {
+        return shipmentRepo.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Shipment not found"));
     }
 }
