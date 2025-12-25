@@ -21,11 +21,15 @@ public class RouteOptimizationResult {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // ✅ REQUIRED BY builder().shipment(...)
     @ManyToOne
     private Shipment shipment;
 
-    private double distanceKm;
-    private double fuelUsed;
+    // ✅ matches builder().optimizedDistanceKm(...)
+    private double optimizedDistanceKm;
+
+    // ✅ matches builder().estimatedFuelUsageL(...)
+    private double estimatedFuelUsageL;
+
+    // ✅ matches builder().estimatedTimeMinutes(...)
     private long estimatedTimeMinutes;
 }
