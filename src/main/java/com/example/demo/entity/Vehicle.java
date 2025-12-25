@@ -21,6 +21,9 @@ public class Vehicle {
 
     private double capacityKg;
 
+    // ✅ REQUIRED BY RouteOptimizationServiceImpl
+    private double fuelEfficiency;
+
     @ManyToOne
     private User user;
 }
