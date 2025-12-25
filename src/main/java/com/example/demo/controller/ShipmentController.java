@@ -1,33 +1,33 @@
-package com.example.demo.controller;
+// package com.example.demo.controller;
 
-import com.example.demo.entity.Shipment;
-import com.example.demo.service.ShipmentService;
-import org.springframework.web.bind.annotation.*;
+// import com.example.demo.entity.Shipment;
+// import com.example.demo.service.ShipmentService;
+// import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+// import java.util.List;
 
-@RestController
-@RequestMapping("/shipments")
-public class ShipmentController {
+// @RestController
+// @RequestMapping("/shipments")
+// public class ShipmentController {
 
-    private final ShipmentService shipmentService;
+//     private final ShipmentService shipmentService;
 
-    public ShipmentController(ShipmentService shipmentService) {
-        this.shipmentService = shipmentService;
-    }
+//     public ShipmentController(ShipmentService shipmentService) {
+//         this.shipmentService = shipmentService;
+//     }
 
-    @PostMapping
-    public Shipment createShipment(@RequestBody Shipment shipment) {
-        return shipmentService.createShipment(shipment);
-    }
+//     @PostMapping
+//     public Shipment createShipment(@RequestBody Shipment shipment) {
+//         return shipmentService.createShipment(shipment);
+//     }
 
-    @GetMapping
-    public List<Shipment> getAllShipments() {
-        return shipmentService.getAllShipments();
-    }
+//     @GetMapping
+//     public List<Shipment> getAllShipments() {
+//         return shipmentService.getAllShipments();
+//     }
 
-    @GetMapping("/{id}")
-    public Shipment getShipment(@PathVariable Long id) {
-        return shipmentService.getShipmentById(id);
-    }
-}
+//     @GetMapping("/{id}")
+//     public Shipment getShipment(@PathVariable Long id) {
+//         return shipmentService.getShipmentById(id);
+//     }
+// }
