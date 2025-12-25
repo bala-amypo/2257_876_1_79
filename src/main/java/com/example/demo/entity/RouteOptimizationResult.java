@@ -10,6 +10,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -24,12 +26,15 @@ public class RouteOptimizationResult {
     @ManyToOne
     private Shipment shipment;
 
-    // ✅ matches builder().optimizedDistanceKm(...)
+    // matches builder().optimizedDistanceKm(...)
     private double optimizedDistanceKm;
 
-    // ✅ matches builder().estimatedFuelUsageL(...)
+    // matches builder().estimatedFuelUsageL(...)
     private double estimatedFuelUsageL;
 
-    // ✅ matches builder().estimatedTimeMinutes(...)
+    // matches builder().estimatedTimeMinutes(...)
     private long estimatedTimeMinutes;
+
+    // ✅ matches builder().generatedAt(...)
+    private LocalDateTime generatedAt;
 }
