@@ -82,6 +82,13 @@
             <version>5.11.0</version>
             <scope>test</scope>
         </dependency>
+        <!-- Servlet API (needed for JwtFilter, does NOT start server) -->
+<dependency>
+    <groupId>jakarta.servlet</groupId>
+    <artifactId>jakarta.servlet-api</artifactId>
+    <scope>provided</scope>
+</dependency>
+
 
     </dependencies>
 
