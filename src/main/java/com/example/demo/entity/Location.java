@@ -20,6 +20,7 @@ public class Location {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String name;      // ✅ REQUIRED by tests
     private double latitude;
     private double longitude;
 }
