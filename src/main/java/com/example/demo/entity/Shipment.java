@@ -9,29 +9,22 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.time.LocalDate;
-
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 public class Shipment {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @ManyToOne
     private Location pickupLocation;
-
     @ManyToOne
     private Location dropLocation;
-
     @ManyToOne
     private Vehicle vehicle;
-
     private double weightKg;
     private LocalDate scheduledDate;
 }
