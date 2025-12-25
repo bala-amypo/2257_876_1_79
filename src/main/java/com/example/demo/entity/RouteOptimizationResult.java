@@ -26,15 +26,8 @@ public class RouteOptimizationResult {
     @ManyToOne
     private Shipment shipment;
 
-    // matches builder().optimizedDistanceKm(...)
     private double optimizedDistanceKm;
-
-    // matches builder().estimatedFuelUsageL(...)
     private double estimatedFuelUsageL;
-
-    // matches builder().estimatedTimeMinutes(...)
     private long estimatedTimeMinutes;
-
-    // ✅ matches builder().generatedAt(...)
     private LocalDateTime generatedAt;
 }
