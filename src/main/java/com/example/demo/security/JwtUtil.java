@@ -25,7 +25,6 @@ public class JwtUtil {
                 .signWith(key)
                 .compact();
     }
-
     public Jws<Claims> validateToken(String token) {
         return Jwts.parserBuilder()
                 .setSigningKey(key)
