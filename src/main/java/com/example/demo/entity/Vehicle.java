@@ -1,12 +1,12 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
+import lombok.*;
 
 @Entity
+@Table(name = "vehicles")
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Vehicle {
@@ -15,7 +15,13 @@ public class Vehicle {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne
+    private User user;
+
+    @Column(unique = true)
     private String vehicleNumber;
 
-    private double fuelEfficiency; // km per liter
+    private Double capacityKg;
+
+    private Double fuelEfficiency;
 }

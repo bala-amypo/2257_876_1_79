@@ -4,8 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Getter
-@Setter
+@Table(name = "locations")
+@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -16,6 +16,6 @@ public class Location {
     private Long id;
 
     private String name;
-    private double latitude;
-    private double longitude;
+    private Double latitude;
+    private Double longitude;
 }

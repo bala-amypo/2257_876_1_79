@@ -1,12 +1,14 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
+import lombok.*;
+
+import java.time.LocalDate;
 
 @Entity
+@Table(name = "shipments")
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Shipment {
@@ -15,9 +17,15 @@ public class Shipment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String source;
+    @ManyToOne
+    private Vehicle vehicle;
 
-    private String destination;
+    @ManyToOne
+    private Location pickupLocation;
 
-    private double distance;
+    @ManyToOne
+    private Location dropLocation;
+
+    private Double weightKg;
+    private LocalDate scheduledDate;
 }
