@@ -1,27 +1,26 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.*;
-import lombok.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Entity
-@Table(name = "vehicles")
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
 public class Vehicle {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private double capacityKg;
+
     @ManyToOne
     private User user;
-
-    @Column(unique = true)
-    private String vehicleNumber;
-
-    private Double capacityKg;
-
-    private Double fuelEfficiency;
 }

@@ -1,16 +1,20 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.*;
-import lombok.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "shipments")
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
 public class Shipment {
 
     @Id
@@ -18,14 +22,14 @@ public class Shipment {
     private Long id;
 
     @ManyToOne
-    private Vehicle vehicle;
-
-    @ManyToOne
     private Location pickupLocation;
 
     @ManyToOne
     private Location dropLocation;
 
-    private Double weightKg;
+    @ManyToOne
+    private Vehicle vehicle;
+
+    private double weightKg;
     private LocalDate scheduledDate;
 }
