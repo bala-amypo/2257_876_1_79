@@ -10,24 +10,20 @@ import java.util.List;
 @RequestMapping("/vehicles")
 public class VehicleController {
 
-    private final VehicleService vehicleService;
+    private final VehicleService service;
 
-    public VehicleController(VehicleService vehicleService) {
-        this.vehicleService = vehicleService;
+    public VehicleController(VehicleService service) {
+        this.service = service;
     }
 
-    @PostMapping
-    public Vehicle createVehicle(@RequestBody Vehicle vehicle) {
-        return vehicleService.createVehicle(vehicle);
+    @PostMapping("/{userId}")
+    public Vehicle addVehicle(@PathVariable Long userId,
+                              @RequestBody Vehicle vehicle) {
+        return service.addVehicle(userId, vehicle);
     }
 
-    @GetMapping
-    public List<Vehicle> getAllVehicles() {
-        return vehicleService.getAllVehicles();
-    }
-
-    @GetMapping("/{id}")
-    public Vehicle getVehicle(@PathVariable Long id) {
-        return vehicleService.getVehicleById(id);
+    @GetMapping("/user/{userId}")
+    public List<Vehicle> getVehiclesByUser(@PathVariable Long userId) {
+        return service.getVehiclesByUser(userId);
     }
 }

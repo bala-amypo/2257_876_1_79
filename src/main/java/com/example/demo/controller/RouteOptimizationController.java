@@ -1,29 +1,26 @@
-// package com.example.demo.controller;
+package com.example.demo.controller;
 
-// import com.example.demo.entity.RouteOptimizationResult;
-// import com.example.demo.service.RouteOptimizationService;
-// import org.springframework.web.bind.annotation.*;
+import com.example.demo.entity.RouteOptimizationResult;
+import com.example.demo.service.RouteOptimizationService;
+import org.springframework.web.bind.annotation.*;
 
-// @RestController
-// @RequestMapping("/api/routes")
-// public class RouteOptimizationController {
+@RestController
+@RequestMapping("/optimize")
+public class RouteOptimizationController {
 
-//     private final RouteOptimizationService routeOptimizationService;
+    private final RouteOptimizationService service;
 
-//     public RouteOptimizationController(RouteOptimizationService routeOptimizationService) {
-//         this.routeOptimizationService = routeOptimizationService;
-//     }
+    public RouteOptimizationController(RouteOptimizationService service) {
+        this.service = service;
+    }
 
-//     @GetMapping("/optimize")
-//     public RouteOptimizationResult optimizeRoute(
-//             @RequestParam double distance,
-//             @RequestParam double fuelEfficiency,
-//             @RequestParam double fuelPrice
-//     ) {
-//         return routeOptimizationService.optimizeRoute(
-//                 distance,
-//                 fuelEfficiency,
-//                 fuelPrice
-//         );
-//     }
-// }
+    @PostMapping("/{shipmentId}")
+    public RouteOptimizationResult optimize(@PathVariable Long shipmentId) {
+        return service.optimizeRoute(shipmentId);
+    }
+
+    @GetMapping("/result/{resultId}")
+    public RouteOptimizationResult getResult(@PathVariable Long resultId) {
+        return service.getResult(resultId);
+    }
+}
