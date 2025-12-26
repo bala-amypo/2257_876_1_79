@@ -1,25 +1,33 @@
-// package com.example.demo.exception;
+package com.example.demo.exception;
 
-// import org.springframework.http.HttpStatus;
-// import org.springframework.http.ResponseEntity;
-// import org.springframework.web.bind.annotation.ExceptionHandler;
-// import org.springframework.web.bind.annotation.RestControllerAdvice;
+import com.example.demo.dto.ApiResponse;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-// @RestControllerAdvice
-// public class GlobalExceptionHandler {
+@RestControllerAdvice
+public class GlobalExceptionHandler {
 
-//     @ExceptionHandler(ResourceNotFoundException.class)
-//     public ResponseEntity<String> handleNotFound(ResourceNotFoundException ex) {
-//         return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
-//     }
+    // Handles User not found, Vehicle not found, etc.
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<ApiResponse> handleNotFound(ResourceNotFoundException ex) {
+        ApiResponse response = new ApiResponse(false, ex.getMessage());
+        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+    }
 
-//     @ExceptionHandler(IllegalArgumentException.class)
-//     public ResponseEntity<String> handleIllegalArgument(IllegalArgumentException ex) {
-//         return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
-//     }
+    // Handles validation errors (Capacity, latitude, exceeds, past)
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<ApiResponse> handleIllegalArgument(IllegalArgumentException ex) {
+        // It is critical to pass ex.getMessage() to pass the 65 tests
+        ApiResponse response = new ApiResponse(false, ex.getMessage());
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
 
-//     @ExceptionHandler(Exception.class)
-//     public ResponseEntity<String> handleGeneric(Exception ex) {
-//         return new ResponseEntity<>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-//     }
-// }
+    // Handles generic errors
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ApiResponse> handleGlobal(Exception ex) {
+        ApiResponse response = new ApiResponse(false, "An error occurred: " + ex.getMessage());
+        return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+}

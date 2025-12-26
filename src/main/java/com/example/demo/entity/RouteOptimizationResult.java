@@ -1,33 +1,26 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
+import jakarta.persistence.*;
+import lombok.*;
 import java.time.LocalDateTime;
 
+@Entity
+@Table(name = "route_optimization_results")
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
+@Builder
 public class RouteOptimizationResult {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name = "shipment_id")
     private Shipment shipment;
 
-    private double optimizedDistanceKm;
-    private double estimatedFuelUsageL;
-    private long estimatedTimeMinutes;
+    private Double optimizedDistanceKm;
+    private Double estimatedFuelUsageL;
     private LocalDateTime generatedAt;
 }
+
