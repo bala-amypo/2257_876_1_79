@@ -1,27 +1,27 @@
+
 package com.example.demo.controller;
 
 import com.example.demo.entity.Shipment;
 import com.example.demo.service.ShipmentService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/shipments")
 public class ShipmentController {
+    private final ShipmentService shipmentService;
 
-    private final ShipmentService service;
-
-    public ShipmentController(ShipmentService service) {
-        this.service = service;
+    public ShipmentController(ShipmentService shipmentService) {
+        this.shipmentService = shipmentService;
     }
 
     @PostMapping("/{vehicleId}")
-    public Shipment createShipment(@PathVariable Long vehicleId,
-                                   @RequestBody Shipment shipment) {
-        return service.createShipment(vehicleId, shipment);
+    public ResponseEntity<Shipment> createShipment(@PathVariable Long vehicleId, @RequestBody Shipment shipment) {
+        return ResponseEntity.ok(shipmentService.createShipment(vehicleId, shipment));
     }
 
     @GetMapping("/{shipmentId}")
-    public Shipment getShipment(@PathVariable Long shipmentId) {
-        return service.getShipment(shipmentId);
+    public ResponseEntity<Shipment> getShipment(@PathVariable Long shipmentId) {
+        return ResponseEntity.ok(shipmentService.getShipment(shipmentId));
     }
 }
