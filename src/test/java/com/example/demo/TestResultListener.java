@@ -6,18 +6,25 @@ import org.testng.ITestResult;
 public class TestResultListener implements ITestListener {
 
     @Override
+    public void onTestStart(ITestResult result) {
+        System.out.println("Starting Test: " + result.getName());
+    }
+
+    @Override
     public void onTestSuccess(ITestResult result) {
-        System.out.println(result.getMethod().getMethodName() + " - PASS");
+        System.out.println("PASSED: " + result.getName());
     }
 
     @Override
     public void onTestFailure(ITestResult result) {
-        System.out.println(result.getMethod().getMethodName() + " - FAIL");
+        System.out.println("FAILED: " + result.getName());
+        if (result.getThrowable() != null) {
+            System.out.println("Reason: " + result.getThrowable().getMessage());
+        }
     }
 
     @Override
     public void onTestSkipped(ITestResult result) {
-        System.out.println(result.getMethod().getMethodName() + " - SKIP");
+        System.out.println("SKIPPED: " + result.getName());
     }
 }
-
