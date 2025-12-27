@@ -11,30 +11,21 @@ import java.time.LocalDateTime;
 
 @Service
 public class RouteOptimizationServiceImpl implements RouteOptimizationService {
-
     private final ShipmentRepository shipmentRepository;
     private final RouteOptimizationResultRepository resultRepository;
-
     public RouteOptimizationServiceImpl(ShipmentRepository shipmentRepository, 
                                        RouteOptimizationResultRepository resultRepository) {
         this.shipmentRepository = shipmentRepository;
         this.resultRepository = resultRepository;
     }
-
     @Override
     public RouteOptimizationResult optimizeRoute(Long shipmentId) {
         Shipment shipment = shipmentRepository.findById(shipmentId)
                 .orElseThrow(() -> new ResourceNotFoundException("Shipment not found"));
-
-        // Calculation: Compute dummy distance (Euclidean)
         double latDiff = shipment.getDropLocation().getLatitude() - shipment.getPickupLocation().getLatitude();
         double lonDiff = shipment.getDropLocation().getLongitude() - shipment.getPickupLocation().getLongitude();
         double distance = Math.hypot(latDiff, lonDiff);
-        
-        // Ensure distance is non-zero as per rules
         if (distance <= 0) distance = 1.0;
-
-        // Calculation: Fuel = distance / efficiency
         double fuelEfficiency = shipment.getVehicle().getFuelEfficiency();
         double fuelUsage = distance / (fuelEfficiency > 0 ? fuelEfficiency : 1.0);
 
