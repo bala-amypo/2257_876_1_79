@@ -33,12 +33,10 @@ public class VehicleServiceImpl implements VehicleService {
         vehicle.setUser(user);
         return vehicleRepository.save(vehicle);
     }
-
     @Override
     public List<Vehicle> getVehiclesByUser(Long userId) {
         return vehicleRepository.findByUserId(userId);
     }
-
     @Override
     public Vehicle findById(Long id) {
         return vehicleRepository.findById(id)
