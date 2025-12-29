@@ -18,7 +18,7 @@ public class SwaggerConfig {
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("0_Transport Route Optimization API")
+                        .title("Transport Route Optimization API")
                         .version("1.0")
                         .description("Implementation for Transport API"))
                 .servers(List.of(new Server().url("https://9147.32procr.amypo.ai/")))
