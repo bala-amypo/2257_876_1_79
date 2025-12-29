@@ -20,7 +20,7 @@ public class SwaggerConfig {
                 .info(new Info()
                         .title("0_Transport Route Optimization API")
                         .version("1.0")
-                        .description("Helper Document Implementation for Transport API"))
+                        .description("Implementation for Transport API"))
                 .servers(List.of(new Server().url("https://9147.32procr.amypo.ai/")))
                 .addSecurityItem(new SecurityRequirement().addList("Bearer Authentication"))
                 .components(new Components()
