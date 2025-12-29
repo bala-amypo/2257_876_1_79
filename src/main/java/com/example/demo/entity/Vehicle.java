@@ -1,9 +1,7 @@
 
 package com.example.demo.entity;
-
 import jakarta.persistence.*;
 import lombok.*;
-
 @Entity
 @Table(name = "vehicles")
 @Data
@@ -22,6 +20,6 @@ public class Vehicle {
     @Column(unique = true)
     private String vehicleNumber;
     private Double capacityKg;
-    private Double fuelEfficiency; // Km per liter
+    private Double fuelEfficiency; 
 }
 
