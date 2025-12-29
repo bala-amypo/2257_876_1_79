@@ -25,14 +25,13 @@ public class JwtUtil {
 
     public String generateToken(Long userId, String email, String role) {
         Map<String, Object> claims = new HashMap<>();
-        // These keys must match exactly what the tests expect
         claims.put("userId", userId);
         claims.put("email", email); 
         claims.put("role", role);
 
         return Jwts.builder()
                 .setClaims(claims)
-                .setSubject(email) // Also setting subject for standard compliance
+                .setSubject(email) 
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + expirationMillis))
                 .signWith(Keys.hmacShaKeyFor(secretKey.getBytes()), SignatureAlgorithm.HS256)
